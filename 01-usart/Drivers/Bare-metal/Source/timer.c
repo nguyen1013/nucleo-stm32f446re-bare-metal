@@ -5,10 +5,10 @@
  *      Author: nn
  */
 
-#include "timer.h"
+#include "timer6.h"
 
 
-void tim6_init(void)
+void Tim6_init(void)
 {
     RCC->APB1ENR |= RCC_APB1ENR_TIM6EN;
 

@@ -11,7 +11,7 @@
 #include "stm32f4xx.h"
 
 
-void tim6_init(void);
+void Tim6_init(void);
 
 void delay_ms(uint32_t ms);
 

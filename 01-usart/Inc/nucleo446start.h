@@ -1,62 +1,50 @@
-/**
- * @brief System Clock Configuration
- * @retval None
+/*
+ * nucleo446start.h
+ *
+ *  Created on: 16.5.2026
+ *      Author: nn
  */
-#include <stm32f4xx.h>
-#define PLL_M 	4
-#define PLL_N 	180
-#define PLL_P 	0  // PLLP = 2
-#define PLL_Q  8   // 360/8 = 45MHz
 
-void SystemClock_Config(void) {
+#ifndef NUCLEO446START_H
+#define NUCLEO446START_H
 
-/*	 1. ENABLE HSE and wait for the HSE to become Ready*/
-	RCC->CR |= 1 << 16;
-	while (!(RCC->CR & (1 << 17)))
-		;
+#include "stm32f4xx.h"
 
-/*	 2. Set the POWER ENABLE CLOCK and VOLTAGE REGULATOR*/
-	RCC->APB1ENR |= 1 << 28;
-	PWR->CR |= 3 << 14;
+/* =========================================================
+ *  PLL Configuration for STM32F446RE @ 180 MHz
+ *
+ *  Source      : HSE
+ *  VCO input   : HSE / PLL_M  =  8 MHz / 4  =  2 MHz
+ *  VCO output  : VCO_in * PLL_N = 2 * 180   = 360 MHz
+ *  SYSCLK      : VCO_out / PLLP = 360 / 2   = 180 MHz
+ *  USB/SDIO    : VCO_out / PLL_Q = 360 / 8  =  45 MHz
+ * ========================================================= */
+#define PLL_M   4       /* VCO input divider  (2–63)          */
+#define PLL_N   180     /* VCO multiplier     (50–432)        */
+#define PLL_P   0       /* SYSCLK divider: 0→/2, 1→/4 ...    */
+#define PLL_Q   8       /* USB/SDIO/RNG clock = 360/8 = 45MHz */
 
-	// Turn on Over-drive for 180MHz
-	PWR->CR   |= (1 << 16);                  // ODEN
-	while (!(PWR->CSR & (1 << 16)));         // wait for ODRDY
-	PWR->CR   |= (1 << 17);                  // ODSWEN
-	while (!(PWR->CSR & (1 << 17)));         // wait for ODSWRDY
+/* =========================================================
+ *  Public API
+ * ========================================================= */
 
-/*	 3. Configure the FLASH PREFETCH and the LATENCY Related Settings*/
-	FLASH->ACR = (1 << 8) | (1 << 9) | (1 << 10) | (5 << 0);
+/**
+ * @brief  Configure system clock to 180 MHz using HSE + PLL.
+ *         - HSE as PLL source
+ *         - Over-Drive mode enabled (required above 168 MHz)
+ *         - Flash: prefetch + instruction/data cache, 5 wait-states
+ *         - AHB  : /1  → 180 MHz
+ *         - APB1 : /4  →  45 MHz
+ *         - APB2 : /2  →  90 MHz
+ */
+void SystemClock_Config(void);
 
-/*	 4. Configure the PRESCALARS HCLK, PCLK1, PCLK2*/
-	// AHB PR
-	RCC->CFGR &= ~(0xF << 4);
-	// APB1 PR
-	RCC->CFGR |= (5 << 10);
-	// APB2 PR
-	RCC->CFGR |= (4 << 13);
+/**
+ * @brief  Enable the Floating Point Unit (FPU).
+ *         Grants full access to CP10 and CP11 coprocessors.
+ *         Call before any floating-point operation.
+ */
+void fpu_enable(void);
 
-/*	 5. Configure the MAIN PLL*/
-	RCC->PLLCFGR = (PLL_M << 0) | (PLL_N << 6) | (PLL_P << 16)
-	             | (1 << 22)    | (PLL_Q << 24);
-
-/*	 6. Enable the PLL and wait for it to become ready*/
-	RCC->CR |= (1<<24);
-	while (!(RCC->CR & (1<<25)));
-
-/*	 7. Select the Clock Source and wait for it to be set*/
-	RCC->CFGR |= (2<<0);
-	while (!(RCC->CFGR & (2<<2)));
-
-}
-
-void fpu_enable(void) {
-    /* Set CP10 and CP11 Full Access */
-    /* Register CPACR in System Control Block (SCB) */
-    SCB->CPACR |= ((3UL << 10*2) | (3UL << 11*2));
-
-    /* Ensure changing immediately */
-    __DSB();
-    __ISB();
-}
+#endif /* NUCLEO446START_H */
 

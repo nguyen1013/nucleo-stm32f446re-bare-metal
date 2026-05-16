@@ -6,18 +6,21 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Src/main.c \
+../Src/nucleo446start.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
 ../Src/tiny_printf.c 
 
 OBJS += \
 ./Src/main.o \
+./Src/nucleo446start.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
 ./Src/tiny_printf.o 
 
 C_DEPS += \
 ./Src/main.d \
+./Src/nucleo446start.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
 ./Src/tiny_printf.d 
@@ -30,7 +33,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/tiny_printf.cyclo ./Src/tiny_printf.d ./Src/tiny_printf.o ./Src/tiny_printf.su
+	-$(RM) ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/nucleo446start.cyclo ./Src/nucleo446start.d ./Src/nucleo446start.o ./Src/nucleo446start.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/tiny_printf.cyclo ./Src/tiny_printf.d ./Src/tiny_printf.o ./Src/tiny_printf.su
 
 .PHONY: clean-Src
 

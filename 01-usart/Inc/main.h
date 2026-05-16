@@ -10,9 +10,11 @@
 
 
 #include "nucleo446start.h"
+#include <stdio.h>
+#include "timer6.h"
 
 #include "adc.h"
-#include "timer.h"
+#include "uart2.h"
 
 
 
