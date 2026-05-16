@@ -1,0 +1,16 @@
+18:20:44 **** Build of configuration Debug for project template-cubemx ****
+make -j20 all 
+arm-none-eabi-gcc -o "template-cubemx.elf" @"objects.list"   -mcpu=cortex-m4 -T"D:\01-jupiter\05-stm32f4\projects\template-cubemx\STM32F446RETX_FLASH.ld" --specs=nosys.specs -Wl,-Map="template-cubemx.map" -Wl,--gc-sections -static --specs=nano.specs -mfpu=fpv4-sp-d16 -mfloat-abi=hard -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: template-cubemx.elf
+ 
+arm-none-eabi-size  template-cubemx.elf 
+arm-none-eabi-objdump -h -S template-cubemx.elf  > "template-cubemx.list"
+   text	   data	    bss	    dec	    hex	filename
+   1400	      4	   1564	   2968	    b98	template-cubemx.elf
+Finished building: default.size.stdout
+ 
+Finished building: template-cubemx.list
+ 
+
+18:20:45 Build Finished. 0 errors, 0 warnings. (took 602ms)
+

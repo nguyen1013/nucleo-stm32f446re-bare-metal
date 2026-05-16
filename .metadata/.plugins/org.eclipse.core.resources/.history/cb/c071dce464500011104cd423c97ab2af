@@ -1,0 +1,20 @@
+/*
+ * main.h
+ *
+ *  Created on: 14.5.2026
+ *      Author: nn
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+
+#include "stm32f4xx.h"
+#include "nucleo446start.h"
+
+#include "../Bare-metal/Include/adc.h"
+#include "../Bare-metal/Include/timer.h"
+
+
+
+#endif /* MAIN_H_ */

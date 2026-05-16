@@ -1,0 +1,7 @@
+#ifndef ADC_H_
+#define ADC_H_
+
+#include <stm32f4xx.h>
+
+
+#endif /* ADC_H_ */

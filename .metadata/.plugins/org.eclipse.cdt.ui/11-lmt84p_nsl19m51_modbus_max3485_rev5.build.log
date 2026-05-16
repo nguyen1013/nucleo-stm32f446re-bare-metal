@@ -1,0 +1,16 @@
+16:44:49 **** Incremental Build of configuration Debug for project 11-lmt84p_nsl19m51_modbus_max3485_rev5 ****
+make all 
+arm-none-eabi-gcc -o "11-lmt84p_nsl19m51_modbus_max3485_rev5.elf" @"objects.list"   -mcpu=cortex-m3 -T"../stm32_flash.ld" --specs=nosys.specs -Wl,-Map="11-lmt84p_nsl19m51_modbus_max3485_rev5.map" -Wl,--gc-sections -static -Wl,--no-warn-rwx-segments --specs=nano.specs -mfloat-abi=soft -mthumb -Wl,--start-group -lc -lm -Wl,--end-group
+Finished building target: 11-lmt84p_nsl19m51_modbus_max3485_rev5.elf
+ 
+arm-none-eabi-size  11-lmt84p_nsl19m51_modbus_max3485_rev5.elf 
+   text	   data	    bss	    dec	    hex	filename
+   9764	     92	   1380	  11236	   2be4	11-lmt84p_nsl19m51_modbus_max3485_rev5.elf
+Finished building: default.size.stdout
+ 
+arm-none-eabi-objdump -h -S 11-lmt84p_nsl19m51_modbus_max3485_rev5.elf  > "11-lmt84p_nsl19m51_modbus_max3485_rev5.list"
+Finished building: 11-lmt84p_nsl19m51_modbus_max3485_rev5.list
+ 
+
+16:44:49 Build Finished. 0 errors, 0 warnings. (took 718ms)
+

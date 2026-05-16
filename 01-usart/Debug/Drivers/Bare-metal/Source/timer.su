@@ -1,0 +1,2 @@
+../Drivers/Bare-metal/Source/timer.c:11:6:tim6_init	4	static
+../Drivers/Bare-metal/Source/timer.c:22:6:delay_ms	16	static
