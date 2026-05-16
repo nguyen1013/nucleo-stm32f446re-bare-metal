@@ -5,15 +5,15 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Drivers/Bare-metal/Source/main.c \
+../Drivers/Bare-metal/Source/adc.c \
 ../Drivers/Bare-metal/Source/timer.c 
 
 OBJS += \
-./Drivers/Bare-metal/Source/main.o \
+./Drivers/Bare-metal/Source/adc.o \
 ./Drivers/Bare-metal/Source/timer.o 
 
 C_DEPS += \
-./Drivers/Bare-metal/Source/main.d \
+./Drivers/Bare-metal/Source/adc.d \
 ./Drivers/Bare-metal/Source/timer.d 
 
 
@@ -24,7 +24,7 @@ Drivers/Bare-metal/Source/%.o Drivers/Bare-metal/Source/%.su Drivers/Bare-metal/
 clean: clean-Drivers-2f-Bare-2d-metal-2f-Source
 
 clean-Drivers-2f-Bare-2d-metal-2f-Source:
-	-$(RM) ./Drivers/Bare-metal/Source/main.cyclo ./Drivers/Bare-metal/Source/main.d ./Drivers/Bare-metal/Source/main.o ./Drivers/Bare-metal/Source/main.su ./Drivers/Bare-metal/Source/timer.cyclo ./Drivers/Bare-metal/Source/timer.d ./Drivers/Bare-metal/Source/timer.o ./Drivers/Bare-metal/Source/timer.su
+	-$(RM) ./Drivers/Bare-metal/Source/adc.cyclo ./Drivers/Bare-metal/Source/adc.d ./Drivers/Bare-metal/Source/adc.o ./Drivers/Bare-metal/Source/adc.su ./Drivers/Bare-metal/Source/timer.cyclo ./Drivers/Bare-metal/Source/timer.d ./Drivers/Bare-metal/Source/timer.o ./Drivers/Bare-metal/Source/timer.su
 
 .PHONY: clean-Drivers-2f-Bare-2d-metal-2f-Source
 

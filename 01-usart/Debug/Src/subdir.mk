@@ -5,19 +5,19 @@
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
-../Src/adc.c \
+../Src/main.c \
 ../Src/syscalls.c \
 ../Src/sysmem.c \
 ../Src/tiny_printf.c 
 
 OBJS += \
-./Src/adc.o \
+./Src/main.o \
 ./Src/syscalls.o \
 ./Src/sysmem.o \
 ./Src/tiny_printf.o 
 
 C_DEPS += \
-./Src/adc.d \
+./Src/main.d \
 ./Src/syscalls.d \
 ./Src/sysmem.d \
 ./Src/tiny_printf.d 
@@ -30,7 +30,7 @@ Src/%.o Src/%.su Src/%.cyclo: ../Src/%.c Src/subdir.mk
 clean: clean-Src
 
 clean-Src:
-	-$(RM) ./Src/adc.cyclo ./Src/adc.d ./Src/adc.o ./Src/adc.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/tiny_printf.cyclo ./Src/tiny_printf.d ./Src/tiny_printf.o ./Src/tiny_printf.su
+	-$(RM) ./Src/main.cyclo ./Src/main.d ./Src/main.o ./Src/main.su ./Src/syscalls.cyclo ./Src/syscalls.d ./Src/syscalls.o ./Src/syscalls.su ./Src/sysmem.cyclo ./Src/sysmem.d ./Src/sysmem.o ./Src/sysmem.su ./Src/tiny_printf.cyclo ./Src/tiny_printf.d ./Src/tiny_printf.o ./Src/tiny_printf.su
 
 .PHONY: clean-Src
 

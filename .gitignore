@@ -1,0 +1,79 @@
+# Build outputs
+Debug/
+Release/
+build/
+*.elf
+*.hex
+*.bin
+*.map
+*.lst
+*.axf
+*.out
+
+# Objects
+*.o
+*.d
+*.su
+
+# IDE: STM32CubeIDE
+.metadata/
+RemoteSystemsTempFiles/
+
+# ⚠️ Do NOT ignore these if working in team
+# .settings/
+# .cproject
+# .project
+
+*.launch
+
+# STM32CubeMX
+# ✅ KEEP .ioc
+# ✅ KEEP Core/ Drivers/ Middlewares/
+
+# Keil
+*.uvgui*
+*.uvopt*
+*.dep
+*.log
+Listings/
+Objects/
+RTE/
+
+# IAR
+*.ewt
+*.ewd
+*.dni
+settings/
+BrowseInfo/
+Obj/
+List/
+Exe/
+
+# Debug tools
+*.jlink
+*.svd
+# *.cfg  ← consider keeping
+
+# GCC
+*.i
+*.ii
+*.s
+
+# VS Code
+.vscode/*
+!.vscode/settings.json
+!.vscode/launch.json
+
+# JetBrains
+.idea/
+cmake-build-*/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temp
+*.log
+*.tmp
+*.bak
+*.orig
