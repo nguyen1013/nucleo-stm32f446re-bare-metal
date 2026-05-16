@@ -840,3 +840,48 @@ C Model Exception: C Model Status [Update conflict.]
 	at org.eclipse.jface.operation.ModalContext$ModalContextThread.run(ModalContext.java:124)
 !SUBENTRY 1 org.eclipse.cdt.core 4 981 2026-05-16 14:22:18.481
 !MESSAGE Update conflict.
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-16 14:26:46.096
+!MESSAGE Indexed '02-adc' (18 sources, 130 headers) in 1,01 sec: 10 140 declarations; 20 606 references; 4 unresolved inclusions; 356 syntax errors; 967 unresolved names (3 %)
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:30:23.067
+!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
+COM3
+COM5
+COM4
+
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:30:23.067
+!MESSAGE port: COM3
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:30:23.067
+!MESSAGE port: COM5
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:30:23.067
+!MESSAGE port: COM4
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-16 14:39:22.434
+!MESSAGE Indexed '02-adc' (8 sources, 98 headers) in 0,593 sec: 8 643 declarations; 18 364 references; 1 unresolved inclusions; 92 syntax errors; 240 unresolved names (0,88 %)
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:40:07.076
+!MESSAGE Executed PowerShell command powershell.exe -Command "Get-CimInstance -ClassName Win32_SerialPort | Select-Object -ExpandProperty DeviceID":
+COM3
+COM5
+COM4
+COM7
+
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:40:07.077
+!MESSAGE port: COM3
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:40:07.077
+!MESSAGE port: COM5
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:40:07.077
+!MESSAGE port: COM4
+
+!ENTRY com.st.stm32cube.ide.mpu.remote.serial 1 1 2026-05-16 14:40:07.078
+!MESSAGE port: COM7
+
+!ENTRY org.eclipse.cdt.core 1 0 2026-05-16 14:42:22.112
+!MESSAGE Indexed '02-adc' (8 sources, 98 headers) in 0,575 sec: 8 645 declarations; 18 366 references; 1 unresolved inclusions; 92 syntax errors; 240 unresolved names (0,88 %)
