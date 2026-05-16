@@ -1,7 +1,0 @@
-#ifndef ADC_H_
-#define ADC_H_
-
-#include "../CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h"
-
-
-#endif /* ADC_H_ */
