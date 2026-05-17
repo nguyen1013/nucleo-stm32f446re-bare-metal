@@ -1,0 +1,24 @@
+/*
+ * main.h
+ *
+ *  Created on: 14.5.2026
+ *      Author: nn
+ */
+
+#ifndef MAIN_H_
+#define MAIN_H_
+
+#include "nucleo446start.h"
+#include <stdio.h>
+#include "retarget_printf.h"
+
+#include "tim6.h"
+#include "tim7.h"
+#include "uart2.h"
+#include "adc.h"
+#include "dac.h"
+#include "systick.h"
+#include "interrupt_user_button.h"
+#include "timer_dwt.h"
+
+#endif /* MAIN_H_ */
