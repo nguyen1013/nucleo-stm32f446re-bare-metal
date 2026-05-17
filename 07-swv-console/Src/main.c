@@ -24,7 +24,7 @@ int main(void) {
 		if (count >= 100)
 			count = 0;
 
-		delay_s(1);
+		delay_s_tim7(1);
 	}
 }
 

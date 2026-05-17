@@ -24,7 +24,7 @@ void Tim6_init(void) {
 	TIM6->CR1 |= TIM_CR1_CEN;   // start timer
 }
 
-void delay_ms(uint32_t ms) {
+void delay_ms_tim6(uint32_t ms) {
 	while (ms--) {
 		TIM6->SR &= ~TIM_SR_UIF;   // clear flag
 		while (!(TIM6->SR & TIM_SR_UIF))

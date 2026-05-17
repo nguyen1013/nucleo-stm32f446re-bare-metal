@@ -10,7 +10,6 @@
 
 #include "nucleo446start.h"
 #include <stdio.h>
-#include "retarget_printf.h"
 
 #include "tim6.h"
 #include "tim7.h"

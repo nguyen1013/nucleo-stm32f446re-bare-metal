@@ -12,6 +12,6 @@
 
 void Tim6_init(void);
 
-void delay_ms(uint32_t ms);
+void delay_ms_tim6(uint32_t ms);
 
 #endif /* TIM6_H_ */

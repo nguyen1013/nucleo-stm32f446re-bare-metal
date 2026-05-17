@@ -24,7 +24,7 @@ void Tim7_init(void) {
 	TIM7->CR1 |= TIM_CR1_CEN;   // start timer
 }
 
-void delay_s(uint32_t s) {
+void delay_s_tim7(uint32_t s) {
 	while (s--) {
 		TIM7->SR &= ~TIM_SR_UIF;              // clear flag
 		while (!(TIM7->SR & TIM_SR_UIF)) {
