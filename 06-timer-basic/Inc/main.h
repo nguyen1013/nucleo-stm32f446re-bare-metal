@@ -8,7 +8,6 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 
-#include <dac.h>
 #include "nucleo446start.h"
 #include <stdio.h>
 
@@ -16,6 +15,7 @@
 #include "tim7.h"
 #include "uart2.h"
 #include "adc.h"
+#include "dac.h"
 #include "systick.h"
 #include "interrupt_user_button.h"
 
