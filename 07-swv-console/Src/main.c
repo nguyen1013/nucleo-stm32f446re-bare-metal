@@ -17,7 +17,7 @@ int main(void) {
 	while (1) {
 
 		sprintf(buf, "count = %d\n\r", count);
-		UART2_SendString(buf);
+//		UART2_SendString(buf);
 		printf(buf);
 
 		count++;

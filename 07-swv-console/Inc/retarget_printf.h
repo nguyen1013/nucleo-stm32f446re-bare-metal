@@ -10,6 +10,7 @@
 
 #include "stm32f4xx.h"
 #include <stdio.h>
+#include "uart2.h"
 
 int _write(int file, char *ptr, int len);
 
