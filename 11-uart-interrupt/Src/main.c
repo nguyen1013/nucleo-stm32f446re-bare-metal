@@ -38,7 +38,7 @@ void USART2_IRQHandler(void) {
 				buf[i++] = c;
 			}
 
-			if (c == '\r' || i==38) {              // Enter or max length
+			if (c == '\r' || i == 38) {              // Enter or max length
 				buf[i - 1] = '\0';        // replcae '\r' by end of string '\0'
 				line_ready = 1;
 				i = 0;
