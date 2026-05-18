@@ -25,6 +25,9 @@ int main(void) {
 
 
 		delay_ms(1000);
+
+//		UART2_SendChar(UART2_GetChar()); //echo
+
 	}
 }
 
