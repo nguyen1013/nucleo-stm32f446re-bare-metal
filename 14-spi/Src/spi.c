@@ -72,12 +72,12 @@ void SPI1_Disable(void) {
 }
 
 void SPI1_CS_Enable(void) {
-	/* Reset bit => kéo xuống 0 */
+	/* Reset bit => pull down 0 */
 	SPI1_CS_GPIO->BSRR = (1U << SPI1_CS_PIN) << 16;
 }
 
 void SPI1_CS_Disable(void) {
-	/* Set bit => kéo lên 1 */
+	/* Set bit => pull up 1 */
 	SPI1_CS_GPIO->BSRR = (1U << SPI1_CS_PIN);
 }
 
@@ -115,24 +115,24 @@ void SPI1_Receive(uint8_t *data, int size) {
 
 void SPI1_TransmitReceive(uint8_t *txData, uint8_t *rxData, int size) {
 	while (size) {
-		// 1. Đợi TX buffer trống
+		// 1. Wait for empty TX buffer
 		while (!(SPI1->SR & (1 << 1)))
 			;   // TXE
 
-		// 2. Gửi dữ liệu
+		// 2. Send data
 		SPI1->DR = *txData++;
 
-		// 3. Đợi có dữ liệu nhận
+		// 3. Wait for receiving data
 		while (!(SPI1->SR & (1 << 0)))
 			;   // RXNE
 
-		// 4. Đọc dữ liệu
+		// 4. Read data
 		*rxData++ = (uint8_t) SPI1->DR;
 
 		size--;
 	}
 
-	// 5. Đợi transmission complete
+	// 5. Wait transmission complete
 	while (SPI1->SR & (1 << 7))
 		;   // BSY = 0
 
