@@ -7,9 +7,13 @@
 
 #include "tim4.h"
 
-#define T35_TICKS 20   // 2ms
+#define TIM4CLK_HZ   45000000UL
 
-//volatile uint32_t msTicks = 0;
+// Chọn 1 trong 2:
+//  - baud > 19200  -> 1750us (fixed)
+//  - baud <=19200  -> tính theo baud (ví dụ 9600/8N2 -> ~4010us)
+
+#define T35_US       1750    // ví dụ fixed cho baud cao
 
 void Tim4_init(void) {
 	// Enable clock TIM4
@@ -31,25 +35,30 @@ void Tim4_init(void) {
 	TIM4->DIER |= TIM_DIER_UIE;
 
 	// NVIC
-	NVIC_SetPriority(TIM4_IRQn, 5);
+	NVIC_SetPriority(TIM4_IRQn, 6);
 	NVIC_EnableIRQ(TIM4_IRQn);
 
 	// Start
 	TIM4->CR1 |= TIM_CR1_CEN;
 }
 
-void TIM4_init_T35(void) {
-	RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
+void TIM4_init_T35(void)
+{
+    RCC->APB1ENR |= RCC_APB1ENR_TIM4EN;
 
-	TIM4->PSC = 8999;             // 0.1ms per tick
-	TIM4->ARR = T35_TICKS - 1;    // 2ms
+    TIM4->CR1 = 0;
+    TIM4->PSC = (TIM4CLK_HZ / 1000000UL) - 1;  // 45MHz -> 1MHz => PSC=44
+    TIM4->ARR = T35_US - 1;                    // 1750us -> ARR=1749
 
-	TIM4->EGR = TIM_EGR_UG;
+    TIM4->EGR = TIM_EGR_UG;
+    TIM4->SR  = 0;
+    TIM4->DIER |= TIM_DIER_UIE;
 
-	TIM4->SR &= ~TIM_SR_UIF;
-	TIM4->DIER |= TIM_DIER_UIE;
+    TIM4->CR1 |= TIM_CR1_OPM;                  // one-shot (rất hợp Modbus RTU)
 
-	NVIC_SetPriority(TIM4_IRQn, 4);
-	NVIC_EnableIRQ(TIM4_IRQn);
+    NVIC_SetPriority(TIM4_IRQn, 5);
+    NVIC_EnableIRQ(TIM4_IRQn);
+
+    TIM4->CR1 &= ~TIM_CR1_CEN;                 // KHÔNG start ở init
 }
 

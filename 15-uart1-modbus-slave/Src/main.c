@@ -3,6 +3,7 @@
 #include "modbus_crc.h"
 #include "uart1_interrupt.h"
 #include "tim4.h"
+#include "debug_uart.h"
 
 #define SLAVE_ADDRESS 0x01
 #define INPUT_REGISTER 0x01
@@ -34,8 +35,6 @@ volatile uint32_t last_frame_ms = 0;
 
 int read_sensor(int input_address);
 void respond_frame(int sensor_value);
-void write_debug_msg(char *str, int maxchars);
-void write_debug_frame(uint8_t *buf, int len);
 
 volatile uint8_t neFlag = 0;
 volatile uint8_t frameFlag = 0;
@@ -61,9 +60,10 @@ static inline uint32_t millis(void) {
 }
 
 static inline void T35_Timer_Reset(void) {
-	TIM4->CNT = 0;               // reset counter
-	TIM4->SR &= ~TIM_SR_UIF;     // clear flag
-	TIM4->CR1 |= TIM_CR1_CEN;    // start timer
+	TIM4->CR1 &= ~TIM_CR1_CEN;    // stop (an toàn khi đang chạy)
+	TIM4->CNT = 0;
+	TIM4->SR &= ~TIM_SR_UIF;     // clear update flag
+	TIM4->CR1 |= TIM_CR1_CEN;     // start
 }
 
 int main(void) {
@@ -76,7 +76,7 @@ int main(void) {
 	USART1_Init(); // ModBus
 	Uart2_init(); // Used as debugging terminal
 	Tim6_init();
-	Tim4_init();
+	TIM4_init_T35();
 
 	UART2_SendString("Hello....\n\r");
 
@@ -196,7 +196,8 @@ int main(void) {
 
 void TIM4_IRQHandler(void) {
 	if (TIM4->SR & TIM_SR_UIF) {
-		TIM4->SR &= ~TIM_SR_UIF;
+		TIM4->SR &= ~TIM_SR_UIF;      // clear flag
+		// nếu dùng OPM thì timer tự dừng; nếu không OPM thì stop:
 		TIM4->CR1 &= ~TIM_CR1_CEN;
 
 		if (rx_len > 0)
@@ -212,6 +213,9 @@ void USART1_IRQHandler(void) {
 		volatile uint32_t tmp = USART1->DR;
 		(void) tmp;
 		rx_len = 0;
+
+		TIM4->CR1 &= ~TIM_CR1_CEN;
+		TIM4->SR &= ~TIM_SR_UIF;
 		return;
 	}
 
@@ -224,16 +228,11 @@ void USART1_IRQHandler(void) {
 		else
 			rx_len = 0;
 
+		last_rx_ms = msTicks;
+
 		T35_Timer_Reset();
 	}
 
-// IDLE line => end of frame
-	if (sr & USART_SR_IDLE) {
-		volatile uint32_t tmp = USART1->DR;
-		(void) tmp;  // clear IDLE by SR/DR sequence
-		if (rx_len > 0)
-			frame_ready = 1;
-	}
 }
 
 int read_sensor(int input_address) {
@@ -266,37 +265,5 @@ void respond_frame(int sensor_value) {
 		USART1_write(tx_buf_frame[i]);
 	}
 
-}
-
-/**
- * Debug write a string to debug terminal
- */
-void write_debug_msg(char *str, int maxchars) {
-	int i = 0;
-	while (str[i] != '\0') {
-		UART2_SendChar(str[i]);
-		if (++i == maxchars)
-			break;
-	}
-	UART2_SendChar('\r');
-	UART2_SendChar('\n');
-}
-
-char bytestr[] = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b',
-		'c', 'd', 'e', 'f' };
-
-/**
- * Write Modbus frame bytes to debug terminal
- */
-void write_debug_frame(uint8_t *buf, int len) {
-	for (int i = 0; i < len; i++) {
-		UART2_SendChar('0');
-		UART2_SendChar('x');
-		UART2_SendChar(bytestr[(buf[i] & 0xF0) >> 4]);
-		UART2_SendChar(bytestr[buf[i] & 0x0F]);
-		UART2_SendChar(',');
-	}
-	UART2_SendChar('\r');
-	UART2_SendChar('\n');
 }
 

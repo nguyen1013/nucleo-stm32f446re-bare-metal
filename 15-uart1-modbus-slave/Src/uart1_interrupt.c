@@ -54,10 +54,8 @@ void USART1_Init(void) {
 //     USART enable
 	USART1->CR1 |= USART_CR1_UE;
 
-	USART1->CR1 |= USART_CR1_IDLEIE;   // enable IDLE line interrupt
-
 //     NVIC
-	NVIC_SetPriority(USART1_IRQn, 10);
+	NVIC_SetPriority(USART1_IRQn, 5);
 	NVIC_EnableIRQ(USART1_IRQn);
 }
 
