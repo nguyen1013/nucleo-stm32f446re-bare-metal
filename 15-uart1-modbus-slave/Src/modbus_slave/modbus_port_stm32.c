@@ -60,11 +60,11 @@ void USART1_IRQHandler(void) {
 
 	/* Error */
 	if (sr & USART_SR_FE) {
-	    frameFlag = 1;
+		frameFlag = 1;
 	}
 
 	if (sr & USART_SR_NE) {
-	    neFlag = 1;
+		neFlag = 1;
 	}
 
 	if (sr & (USART_SR_FE | USART_SR_NE | USART_SR_ORE)) {

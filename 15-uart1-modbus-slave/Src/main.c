@@ -1,8 +1,4 @@
 #include "main.h"
-#include "modbus_slave.h"
-#include "modbus_config.h"
-#include "modbus_port_stm32.h"
-#include "debug_uart.h"
 
 /* debug counters */
 volatile uint32_t dbg_frame_stuck = 0;

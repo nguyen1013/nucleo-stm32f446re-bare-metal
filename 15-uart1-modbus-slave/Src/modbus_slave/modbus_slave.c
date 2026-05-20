@@ -17,7 +17,6 @@ volatile uint32_t mb_dbg_ignored = 0;
 volatile uint32_t mb_dbg_ok = 0;
 
 /* ================== Local helpers ================== */
-
 static void mb_send_bytes(const uint8_t *buf, uint16_t len) {
 	for (uint16_t i = 0; i < len; i++) {
 		Modbus_Send_Byte(buf[i]);
@@ -54,23 +53,14 @@ static void mb_send_fc04_response_uint16(uint16_t value) {
 }
 
 /* ================== Weak default callback (optional) ================== */
-#if defined(__CC_ARM) || defined(__ARMCC_VERSION)
-__weak int MB_App_ReadInputRegister(uint16_t addr, uint16_t *outValue)
-{
-    (void)addr; (void)outValue;
-    return -1;
-}
-#else
 int __attribute__((weak)) MB_App_ReadInputRegister(uint16_t addr,
 		uint16_t *outValue) {
 	(void) addr;
 	(void) outValue;
 	return -1;
 }
-#endif
 
 /* ================== Public API ================== */
-
 void MB_Slave_ProcessFrame(const uint8_t *frame, uint16_t len) {
 	/* 1) Basic length */
 	if (len < 4) {
@@ -102,7 +92,7 @@ void MB_Slave_ProcessFrame(const uint8_t *frame, uint16_t len) {
 
 		UART2_SendString("CRC FAIL DETECTED\r\n");
 
-		return; // Modbus RTU: CRC sai thì silent (master timeout)
+		return; // Modbus RTU: if wrong CRC then silent (master timeout)
 	}
 
 	/* 4) Function code */

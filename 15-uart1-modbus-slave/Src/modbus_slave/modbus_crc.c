@@ -7,7 +7,6 @@
 
 #include "modbus_crc.h"
 
-
 unsigned short int CRC16(char *nData, unsigned short int wLength) {
 	static const unsigned short int wCRCTable[] = { 0X0000, 0XC0C1, 0XC181,
 			0X0140, 0XC301, 0X03C0, 0X0280, 0XC241, 0XC601, 0X06C0, 0X0780,

@@ -25,4 +25,11 @@
 #include "i2c.h"
 #include "spi.h"
 
+/* Modbus slave */
+#include "tim4.h" // for creating T3.5 timer
+#include "debug_uart.h"
+#include "modbus_slave.h"
+#include "modbus_config.h"
+#include "modbus_port_stm32.h"
+
 #endif /* MAIN_H_ */

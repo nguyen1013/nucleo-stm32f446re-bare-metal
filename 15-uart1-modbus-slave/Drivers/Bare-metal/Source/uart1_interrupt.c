@@ -62,8 +62,8 @@ void USART1_Init(void) {
 void USART1_write(char data) {
 	//wait while TX buffer is empty
 	while (!(USART1->SR & 0x0080)) {
-	} 	//TXE: Transmit data register empty. p736-737
-	USART1->DR = (data);			//p739
+	} 	//TXE: Transmit data register empty
+	USART1->DR = (data);
 }
 
 char USART1_read() {
@@ -71,6 +71,6 @@ char USART1_read() {
 	//wait while RX buffer is data is ready to be read
 	while (!(USART1->SR & 0x0020)) {
 	} 	//Bit 5 RXNE: Read data register not empty
-	data = USART1->DR;			//p739
+	data = USART1->DR;
 	return data;
 }
