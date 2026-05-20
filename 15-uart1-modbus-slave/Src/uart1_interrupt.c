@@ -10,57 +10,55 @@
 /**
  * Initialize Modbus pins for UART1
  */
-void USART1_Init(void)
-{
+void USART1_Init(void) {
 //     Enable clocks
-    RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
-    RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
+	RCC->APB2ENR |= RCC_APB2ENR_USART1EN;
+	RCC->AHB1ENR |= RCC_AHB1ENR_GPIOAEN;
 
 //     PA9 TX, PA10 RX
 
 //     Clear mode
-    GPIOA->MODER &= ~((3 << (9*2)) | (3 << (10*2)));
+	GPIOA->MODER &= ~((3 << (9 * 2)) | (3 << (10 * 2)));
 
 //     Alternate function mode
-    GPIOA->MODER |=  ((2 << (9*2)) | (2 << (10*2)));
+	GPIOA->MODER |= ((2 << (9 * 2)) | (2 << (10 * 2)));
 
 //     High speed
-    GPIOA->OSPEEDR |= ((3 << (9*2)) | (3 << (10*2)));
+	GPIOA->OSPEEDR |= ((3 << (9 * 2)) | (3 << (10 * 2)));
 
 //     AF7
-    GPIOA->AFR[1] &= ~((0xF << 4) | (0xF << 8));
+	GPIOA->AFR[1] &= ~((0xF << 4) | (0xF << 8));
 
-    GPIOA->AFR[1] |=  ((7 << 4) | (7 << 8));
+	GPIOA->AFR[1] |= ((7 << 4) | (7 << 8));
 
 //     Optional pullup RX
-    GPIOA->PUPDR &= ~((3 << (9*2)) | (3 << (10*2)));
-    GPIOA->PUPDR |=  (1 << (10*2));
+	GPIOA->PUPDR &= ~((3 << (9 * 2)) | (3 << (10 * 2)));
+	GPIOA->PUPDR |= (1 << (10 * 2));
 
 //     Disable USART before config
-    USART1->CR1 = 0;
-
+	USART1->CR1 = 0;
 
 //      APB2 = 90MHz   Baud = 9600
 //    USART1->BRR = 0x249F;
-    USART1->BRR = 0x30D; // Baud = 115200
+	USART1->BRR = 0x30D; // Baud = 115200
 
 //     Enable RX
-    USART1->CR1 |= USART_CR1_RE;
+	USART1->CR1 |= USART_CR1_RE;
 
 //     Enable TX
-    USART1->CR1 |= USART_CR1_TE;
+	USART1->CR1 |= USART_CR1_TE;
 
 //     RX interrupt enable
-    USART1->CR1 |= USART_CR1_RXNEIE;
+	USART1->CR1 |= USART_CR1_RXNEIE;
 
 //     USART enable
-    USART1->CR1 |= USART_CR1_UE;
+	USART1->CR1 |= USART_CR1_UE;
 
-    USART1->CR1 |= USART_CR1_IDLEIE;   // enable IDLE line interrupt
+	USART1->CR1 |= USART_CR1_IDLEIE;   // enable IDLE line interrupt
 
 //     NVIC
-    NVIC_SetPriority(USART1_IRQn, 10);
-    NVIC_EnableIRQ(USART1_IRQn);
+	NVIC_SetPriority(USART1_IRQn, 10);
+	NVIC_EnableIRQ(USART1_IRQn);
 }
 
 /**
@@ -73,7 +71,6 @@ void USART1_write(char data) {
 	} 	//TXE: Transmit data register empty. p736-737
 	USART1->DR = (data);			//p739
 }
-
 
 char USART1_read() {
 	char data = 0;

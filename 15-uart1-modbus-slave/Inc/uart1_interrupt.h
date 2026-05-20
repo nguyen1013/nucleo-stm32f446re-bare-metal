@@ -16,5 +16,4 @@ void USART1_write(char data);
 
 char USART1_read();
 
-
 #endif /* UART1_INTERRUPT_H_ */
