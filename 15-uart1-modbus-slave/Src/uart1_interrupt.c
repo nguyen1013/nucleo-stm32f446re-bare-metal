@@ -40,11 +40,9 @@ void USART1_Init(void)
     USART1->CR1 = 0;
 
 
-//      APB2 = 90MHz
-//      Baud = 9600
-
-
-    USART1->BRR = 0x249F;
+//      APB2 = 90MHz   Baud = 9600
+//    USART1->BRR = 0x249F;
+    USART1->BRR = 0x30D; // Baud = 115200
 
 //     Enable RX
     USART1->CR1 |= USART_CR1_RE;
@@ -58,8 +56,10 @@ void USART1_Init(void)
 //     USART enable
     USART1->CR1 |= USART_CR1_UE;
 
+    USART1->CR1 |= USART_CR1_IDLEIE;   // enable IDLE line interrupt
+
 //     NVIC
-    NVIC_SetPriority(USART1_IRQn, 0);
+    NVIC_SetPriority(USART1_IRQn, 10);
     NVIC_EnableIRQ(USART1_IRQn);
 }
 
