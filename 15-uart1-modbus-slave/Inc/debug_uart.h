@@ -18,28 +18,12 @@ extern "C" {
 #endif
 
 /**
- * Khởi tạo debug UART (nếu bạn muốn gom init debug vào đây).
- * Nếu bạn đã init UART2 ở nơi khác thì có thể không cần dùng hàm này.
- */
-void DebugUART_Init(void);
-
-/**
- * Gửi chuỗi ra UART debug (UART2).
- */
-void DebugUART_SendString(const char *s);
-
-/**
- * Gửi 1 ký tự ra UART debug (UART2).
- */
-void DebugUART_SendChar(char c);
-
-/**
- * Gửi chuỗi debug tối đa maxchars, tự thêm \r\n
+ * Send debug string max maxchars, add \r\n
  */
 void write_debug_msg(char *str, int maxchars);
 
 /**
- * In frame theo dạng: 0x01,0x04,0x00,...
+ * Print frame: 0x01,0x04,0x00,...
  */
 void write_debug_frame(uint8_t *buf, int len);
 

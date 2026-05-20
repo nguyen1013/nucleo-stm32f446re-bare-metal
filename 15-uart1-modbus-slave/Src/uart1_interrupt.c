@@ -59,10 +59,6 @@ void USART1_Init(void) {
 	NVIC_EnableIRQ(USART1_IRQn);
 }
 
-/**
- * Initialize TERMINAL pins for UART2, used for debugging
- */
-
 void USART1_write(char data) {
 	//wait while TX buffer is empty
 	while (!(USART1->SR & 0x0080)) {

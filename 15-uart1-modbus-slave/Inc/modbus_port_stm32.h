@@ -5,28 +5,31 @@
  *      Author: nn
  */
 
-#ifndef MODBUS_PORT_STM32_H_
-#define MODBUS_PORT_STM32_H_
+#ifndef MODBUS_PORT_STM32_H
+#define MODBUS_PORT_STM32_H
 
-#pragma once
 #include <stdint.h>
-#include <stdbool.h>
 
-/* Platform primitives */
-uint32_t mb_port_millis(void);
+/* RX buffer (extern to main.c) */
+extern volatile uint8_t rx_buf[];
+extern volatile uint16_t rx_len;
+extern volatile uint8_t frame_ready;
 
-/* UART send (Modbus line) */
-void mb_port_send_bytes(const uint8_t *data, uint16_t len);
+/* timestamp */
+extern volatile uint32_t msTicks;
+extern volatile uint32_t last_rx_ms;
 
-/* Debug log (UART2) */
-void mb_port_dbg_puts(const char *s);
-void mb_port_dbg_hexdump(const uint8_t *buf, uint16_t len);
+/* error flags */
+extern volatile uint8_t neFlag;
+extern volatile uint8_t frameFlag;
 
-/* Critical section helpers */
-void mb_port_enter_crit(void);
-void mb_port_exit_crit(void);
+/* Init */
+void Modbus_Port_Init(void);
 
-/* T3.5 timer control (TIM4) */
-void mb_port_t35_reset(void);
+/* Send byte */
+void Modbus_Send_Byte(uint8_t b);
+
+/* Timer reset */
+void Modbus_T35_Reset(void);
 
 #endif /* MODBUS_PORT_STM32_H_ */
