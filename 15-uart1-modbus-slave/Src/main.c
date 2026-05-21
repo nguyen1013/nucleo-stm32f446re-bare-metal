@@ -23,6 +23,8 @@ int main(void) {
 	SystemClock_Config();
 	SystemCoreClockUpdate();
 
+	Tim3_init();
+
 	/* Init Modbus port (UART + TIM4) */
 	Modbus_Port_Init();
 
@@ -64,10 +66,13 @@ int main(void) {
 			frame_ready = 0;
 
 			/* debug frame */
+			UART2_SendString("\n\rReceived frame:");
 			write_debug_frame((uint8_t*) rx_buf, len);
 
 			/* ===== CALL MODBUS LAYER ===== */
 			MB_Slave_ProcessFrame((const uint8_t*) rx_buf, len);
 		}
 	}
+
+	return 0;
 }

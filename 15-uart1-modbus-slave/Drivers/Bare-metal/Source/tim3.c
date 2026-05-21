@@ -7,13 +7,14 @@
 
 #include "tim3.h"
 
+// 1ms tick
 void Tim3_init(void) {
 	// Enable clock TIM3
 	RCC->APB1ENR |= RCC_APB1ENR_TIM3EN;
 
 	// Prescaler & ARR (1s)
 	TIM3->PSC = 8999;     // 90MHz / 9000 = 10kHz
-	TIM3->ARR = 9999;     // 10kHz / 10000 = 1Hz
+	TIM3->ARR = 9;     // 10kHz / 10 = 1kHz => 1ms
 
 	// Update register
 	TIM3->EGR = TIM_EGR_UG;

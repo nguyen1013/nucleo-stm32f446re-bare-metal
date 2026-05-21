@@ -9,6 +9,7 @@
 #include "modbus_config.h"
 #include "uart1_interrupt.h"
 #include "tim4.h"
+#include "tim3.h"
 
 /* ===== GLOBAL ===== */
 volatile uint8_t rx_buf[RX_MAX];
@@ -87,5 +88,12 @@ void USART1_IRQHandler(void) {
 
 		last_rx_ms = msTicks;
 		Modbus_T35_Reset();
+	}
+}
+
+void TIM3_IRQHandler(void) {
+	if (TIM3->SR & TIM_SR_UIF) {
+		TIM3->SR &= ~TIM_SR_UIF;
+		msTicks++;   // increase every 1ms
 	}
 }
