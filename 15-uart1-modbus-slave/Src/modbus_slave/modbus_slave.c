@@ -8,7 +8,6 @@
 #include "modbus_slave.h"
 #include "modbus_crc.h"
 #include "modbus_port_stm32.h"   // Modbus_Send_Byte()
-#include "uart2.h"
 
 /* ================== Debug counters ================== */
 volatile uint32_t mb_dbg_crc_fail = 0;
@@ -72,8 +71,6 @@ void MB_Slave_ProcessFrame(const uint8_t *frame, uint16_t len) {
 	if (frame[0] != SLAVE_ADDRESS) {
 		mb_dbg_ignored++;
 
-		UART2_SendString("IGNORED (WRONG ADDRESS)\r\n");
-
 		return;
 	}
 
@@ -89,8 +86,6 @@ void MB_Slave_ProcessFrame(const uint8_t *frame, uint16_t len) {
 
 	if (frame[len - 2] != crc_lo || frame[len - 1] != crc_hi) {
 		mb_dbg_crc_fail++;
-
-		UART2_SendString("CRC FAIL DETECTED\r\n");
 
 		return; // Modbus RTU: if wrong CRC then silent (master timeout)
 	}
