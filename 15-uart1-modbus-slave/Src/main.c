@@ -1,12 +1,5 @@
 #include "main.h"
 
-/* debug counters */
-volatile uint32_t dbg_frame_stuck = 0;
-
-/* timestamp */
-extern volatile uint32_t msTicks;
-extern volatile uint32_t last_rx_ms;
-
 /* ===== Application callback =====
  * Modbus_slave call this function
  */
@@ -23,8 +16,6 @@ int main(void) {
 	SystemClock_Config();
 	SystemCoreClockUpdate();
 
-	Tim3_init();
-
 	/* Init Modbus port (UART + TIM4) */
 	Modbus_Port_Init();
 
@@ -35,7 +26,6 @@ int main(void) {
 	__enable_irq();
 
 	while (1) {
-		uint32_t now = msTicks;
 
 		/* ===== Error from ISR ===== */
 		if (frameFlag) {
@@ -46,15 +36,6 @@ int main(void) {
 		if (neFlag) {
 			UART2_SendString("Noise Error\r\n");
 			neFlag = 0;
-		}
-
-		/* ===== stuck timeout ===== */
-		if (!frame_ready && rx_len > 0) {
-			if ((now - last_rx_ms) > FRAME_STUCK_TIMEOUT_MS) {
-				UART2_SendString("RX stuck -> drop\r\n");
-				dbg_frame_stuck++;
-				rx_len = 0;
-			}
 		}
 
 		/* ===== Process frame ===== */

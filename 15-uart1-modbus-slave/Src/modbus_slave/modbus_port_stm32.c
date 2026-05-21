@@ -16,9 +16,6 @@ volatile uint8_t rx_buf[RX_MAX];
 volatile uint16_t rx_len = 0;
 volatile uint8_t frame_ready = 0;
 
-volatile uint32_t msTicks = 0;
-volatile uint32_t last_rx_ms = 0;
-
 volatile uint8_t neFlag = 0;
 volatile uint8_t frameFlag = 0;
 
@@ -38,7 +35,6 @@ void Modbus_Send_Byte(uint8_t b) {
 
 /* ===== TIMER RESET ===== */
 void Modbus_T35_Reset(void) {
-	TIM4->CR1 &= ~TIM_CR1_CEN;
 	TIM4->CNT = 0;
 	TIM4->SR &= ~TIM_SR_UIF;
 	TIM4->CR1 |= TIM_CR1_CEN;
@@ -60,20 +56,19 @@ void USART1_IRQHandler(void) {
 	uint32_t sr = USART1->SR;
 
 	/* Error */
-	if (sr & USART_SR_FE) {
-		frameFlag = 1;
-	}
-
-	if (sr & USART_SR_NE) {
-		neFlag = 1;
-	}
-
 	if (sr & (USART_SR_FE | USART_SR_NE | USART_SR_ORE)) {
+		if (sr & USART_SR_FE)
+			frameFlag = 1;
+		if (sr & USART_SR_NE)
+			neFlag = 1;
+
 		(void) USART1->DR;
+
 		rx_len = 0;
 
 		TIM4->CR1 &= ~TIM_CR1_CEN;
 		TIM4->SR &= ~TIM_SR_UIF;
+
 		return;
 	}
 
@@ -81,19 +76,12 @@ void USART1_IRQHandler(void) {
 	if (sr & USART_SR_RXNE) {
 		uint8_t b = USART1->DR;
 
-		if (rx_len < RX_MAX)
-			rx_buf[rx_len++] = b;
-		else
+		if (rx_len >= RX_MAX) {
 			rx_len = 0;
+			return;   // drop frame
+		}
+		rx_buf[rx_len++] = b;
 
-		last_rx_ms = msTicks;
 		Modbus_T35_Reset();
-	}
-}
-
-void TIM3_IRQHandler(void) {
-	if (TIM3->SR & TIM_SR_UIF) {
-		TIM3->SR &= ~TIM_SR_UIF;
-		msTicks++;   // increase every 1ms
 	}
 }
