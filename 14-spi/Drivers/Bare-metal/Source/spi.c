@@ -21,7 +21,7 @@ void SPI1_Config(void) {
 
 	SPI1->CR1 |= (1U << 2);               // MSTR=1 (Master mode)
 
-	SPI1->CR1 |= (3U << 3);               // BR=011 => fPCLK/16 (80MHz/16=5MHz)
+	SPI1->CR1 |= (4U << 3);               // BR=100 => fPCLK/32 (90MHz/32=2.8125MHz)
 
 	SPI1->CR1 &= ~(1U << 7);              // LSBFIRST=0 (MSB first)
 
