@@ -149,7 +149,7 @@ void I2C_Read(uint8_t Address, uint8_t *buffer, uint8_t size) {
 		buffer[size - remaining] = I2C1->DR;
 
 		/**** STEP 2-f ****/
-		I2C1->CR1 &= ~(1 << 10);  // clear thde ACK bit
+		I2C1->CR1 &= ~(1 << 10);  // clear the ACK bit
 
 		/**** STEP 2-g ****/
 		I2C1->CR1 |= (1 << 9);  // Stop I2C
