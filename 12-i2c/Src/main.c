@@ -153,7 +153,7 @@ uint8_t AHT20_ReadData(uint8_t *data) {
 	I2C_Read(AHT20_ADDR_R, data, 6);
 	I2C_Stop();
 
-	// Return success (you can change later to real error handling)
+	// Return success (can be changed later to real error handling)
 	return 1;
 }
 
