@@ -18,7 +18,6 @@ extern void I2C_Stop(void);
 #define I2C_TIMEOUT_TICKS   (300000UL)
 #endif
 
-
 static inline int wait_bus_not_busy(uint32_t to) {
 	while (I2C1->SR2 & I2C_SR2_BUSY) {
 		if (to-- == 0U)

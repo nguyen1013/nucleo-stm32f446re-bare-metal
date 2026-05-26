@@ -27,7 +27,7 @@ int main(void) {
 	LCD2004_SendString("Line 3 here...");
 
 	LCD2004_SetCursor(0, 3);
-	LCD2004_SendString("Line 4 here...:12345");
+	LCD2004_SendString("Line 4 here...:123");
 
 	while (1) {
 	}
