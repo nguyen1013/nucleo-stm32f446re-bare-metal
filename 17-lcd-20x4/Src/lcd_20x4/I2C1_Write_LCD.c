@@ -73,7 +73,7 @@ int I2C1_Write_LCD(uint8_t address, int n, uint8_t *data) {
 	if (wait_bus_not_busy(I2C_TIMEOUT_TICKS) < 0) {
 		i2c_soft_reset_recover();
 		if (wait_bus_not_busy(I2C_TIMEOUT_TICKS) < 0) {
-			return -2; // bus stil busy
+			return -2; // bus still busy
 		}
 	}
 
