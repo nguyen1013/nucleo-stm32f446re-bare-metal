@@ -163,6 +163,15 @@ void LCD2004_PrintIntAt(uint8_t col, uint8_t row, int value) {
 	LCD2004_SendString(buf);
 }
 
+void LCD2004_PrintFloatAt(uint8_t col, uint8_t row, float value) {
+	char buf[16];
+
+	snprintf(buf, sizeof(buf), "%.1f", value);
+
+	LCD2004_SetCursor(col, row);
+	LCD2004_SendString(buf);
+}
+
 void LCD2004_PrintStringScroll(uint8_t col, uint8_t row, const char *str) {
 	if (!str)
 		return;
