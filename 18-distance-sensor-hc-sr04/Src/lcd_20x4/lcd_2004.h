@@ -37,6 +37,7 @@ void LCD2004_ClearFromPos(uint8_t col, uint8_t row); // clear from (col,row) to 
 // Display utilities
 void LCD2004_PrintIntAt(uint8_t col, uint8_t row, int value);
 void LCD2004_PrintStringScroll(uint8_t col, uint8_t row, const char *str);
+void LCD2004_PrintFloatAt(uint8_t col, uint8_t row, float value);
 
 #ifdef __cplusplus
 }
