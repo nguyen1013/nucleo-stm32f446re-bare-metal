@@ -12,6 +12,4 @@
 
 void Tim7_init(void);
 
-void delay_s_tim7(uint32_t s);
-
 #endif /* TIM7_H_ */
