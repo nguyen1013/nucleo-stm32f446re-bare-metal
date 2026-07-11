@@ -23,6 +23,7 @@ RemoteSystemsTempFiles/
 # .settings/
 # .cproject
 # .project
+*/language.settings.xml
 
 *.launch
 
@@ -77,3 +78,9 @@ Thumbs.db
 *.tmp
 *.bak
 *.orig
+
+# Freefile Sync
+*.ffs_db
+*.prefs
+*.prefs
+**/.settings/*.xml
