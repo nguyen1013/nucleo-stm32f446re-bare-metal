@@ -59,6 +59,9 @@ Exe/
 *.i
 *.ii
 *.s
+*.s
+!startup_stm32f446retx.s
+
 
 # VS Code
 .vscode/*
@@ -84,3 +87,6 @@ Thumbs.db
 *.prefs
 *.prefs
 **/.settings/*.xml
+
+# CSV files
+*.csv
