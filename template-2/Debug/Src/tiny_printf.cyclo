@@ -1,9 +1,0 @@
-../Src/tiny_printf.c:80:6:ts_itoa	4
-../Src/tiny_printf.c:104:5:ts_formatstring	14
-../Src/tiny_printf.c:170:5:ts_formatlength	8
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:308:5:siprintf	1
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:300:5:fiprintf	1
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:304:5:iprintf	1
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:221:5:fputs	2
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:227:5:puts	2
-C:\ST\STM32CubeIDE_1.18.1\STM32CubeIDE\plugins\com.st.stm32cube.ide.mcu.externaltools.gnu-tools-for-stm32.14.3.rel1.win32_1.0.100.202602081740\tools\bin/../lib/gcc/arm-none-eabi/14.3.1/../../../../arm-none-eabi/include/stdio.h:230:8:fwrite	1

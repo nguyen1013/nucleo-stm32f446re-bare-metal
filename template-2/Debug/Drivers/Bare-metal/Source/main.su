@@ -1,3 +1,0 @@
-../Inc/nucleo446start.h:11:6:SystemClock_Config	4	static
-../Inc/nucleo446start.h:53:6:fpu_enable	4	static,ignoring_inline_asm
-../Drivers/Bare-metal/Source/main.c:3:5:main	8	static
